@@ -70,10 +70,11 @@ app.delete('/items/:item', jsonParser, function(req, res) {
         thisIndexFound = storage.items[i];
         return thisIndexFound;
       };
-
     };
   };
   var itemToDelete = req.params.item;
+  console.log("You are trying to delete: " + req.body);
+  console.log()
   var deleteThisIndex = 999999,
       deleteThisObject;
   deleteThisIndex = findTheItem(itemToDelete);
