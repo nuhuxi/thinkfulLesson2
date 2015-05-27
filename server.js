@@ -38,6 +38,10 @@ app.get('/items', function(req, res) {
   res.json(storage.items);
 });
 
+/* ***************************************************** */
+/*             ADD AN ITEM WITH POST                   * */
+/* ***************************************************** */
+
 app.post('/items', jsonParser, function(req, res) {
 
   if (!req.body) {
@@ -50,31 +54,46 @@ app.post('/items', jsonParser, function(req, res) {
 
 });
 
+/* ***************************************************** */
+/*                    DELETE                           * */
+/* ***************************************************** */
+
 app.delete('/items/:item', jsonParser, function(req, res) {
   if (!req.body) {
     return res.sendStatus(400);
   }
   var findTheItem = function(findThisItem){
-    var thisItemFound = '';
+    var thisIndexFound = '';
 
     for(var i = 0; i < storage.items.length; i++){
-
       if(storage.items[i].id == findThisItem){
-        thisItemFound = storage.items[i];
-        return thisItemFound;
+        thisIndexFound = storage.items[i];
+        return thisIndexFound;
       };
 
     };
   };
   var itemToDelete = req.params.item;
-  var deleteThisObject = '';
-  deleteThisObject = findTheItem(itemToDelete);
-  if(!deleteThisObject){
-    itemToDelete.name = "Sorry the item you have asked to delete isn't on the list";
-    itemToDelete.id = itemToDelete;
+  var deleteThisIndex = 999999,
+      deleteThisObject;
+  deleteThisIndex = findTheItem(itemToDelete);
+  console.log("You have asked to delete " + storage.items[deleteThisIndex].name);
+  if(deleteThisIndex < 999999){
+    deleteThisObject = storage.items[deleteThisIndex];
+    storage.items.splice(deleteThisIndex, 1);
+
+  } else {
+    deleteThisObject.name = "Sorry the item you have asked to delete isn't on the list";
+    deleteThisObject.id = itemToDelete;
+
   };
+
   res.status(201).json(deleteThisObject);
 });
+
+/* ***************************************************** */
+/*                    PUT                              * */
+/* ***************************************************** */
 
 app.put('/items/:item', jsonParser, function(req, res) {
 
