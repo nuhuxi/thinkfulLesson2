@@ -73,8 +73,7 @@ app.delete('/items/:item', jsonParser, function(req, res) {
     };
   };
   var itemToDelete = req.params.item;
-  console.log("You are trying to delete: " + req.body);
-  console.log()
+  console.log("You are trying to delete: " + req.body.name);
   var deleteThisIndex = 999999,
       deleteThisObject;
   deleteThisIndex = findTheItem(itemToDelete);
