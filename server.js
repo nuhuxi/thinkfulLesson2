@@ -66,7 +66,7 @@ app.delete('/items/:item', jsonParser, function(req, res) {
     for(var i = 0; i < storage.items.length; i++){
       if(storage.items[i].id == findThisItem){
         thisIndexFound = i;
-        console.log("Inside the if - You are deleting this item " + storage.items[i].name;)
+        console.log("Inside the if - You are deleting this item " + storage.items[i].name)
         return thisIndexFound;
       };
     };
@@ -80,7 +80,7 @@ app.delete('/items/:item', jsonParser, function(req, res) {
     return res.sendStatus(400);
   };
 
-  
+
 
   deleteThisIndex = findTheItem(itemToDelete);
   console.log("You have asked to delete " + storage.items[deleteThisIndex].name);
