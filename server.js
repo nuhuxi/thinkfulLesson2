@@ -59,23 +59,29 @@ app.post('/items', jsonParser, function(req, res) {
 /* ***************************************************** */
 
 app.delete('/items/:item', jsonParser, function(req, res) {
-  if (!req.body) {
-    return res.sendStatus(400);
-  }
+
   var findTheItem = function(findThisItem){
     var thisIndexFound = '';
 
     for(var i = 0; i < storage.items.length; i++){
       if(storage.items[i].id == findThisItem){
-        thisIndexFound = storage.items[i];
+        thisIndexFound = i;
+        console.log("Inside the if - You are deleting this item " + storage.items[i].name;)
         return thisIndexFound;
       };
     };
   };
-  var itemToDelete = req.params.item;
-  console.log("You are trying to delete: " + req.body.name);
-  var deleteThisIndex = 999999,
+  var itemToDelete = req.params.item,
+      deleteThisIndex = 999999,
       deleteThisObject;
+
+  if (!req.body) {
+    console.log("Deleting but the req doesnt have a body");
+    return res.sendStatus(400);
+  };
+
+  
+
   deleteThisIndex = findTheItem(itemToDelete);
   console.log("You have asked to delete " + storage.items[deleteThisIndex].name);
   if(deleteThisIndex < 999999){
