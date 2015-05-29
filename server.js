@@ -4,6 +4,9 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 
+/* ***************************************************** */
+/*             CODE FOR APP                            * */
+/* ***************************************************** */
 var Storage = function() {
   this.items = [];
   this.id = 0;
@@ -50,7 +53,7 @@ app.post('/items', jsonParser, function(req, res) {
 
   var item = storage.add(req.body.name);
   console.log("Added this item: " + req.body.name);
-  res.status(201).json(item);
+  res.status(201).json(req.body.name);
 
 });
 
